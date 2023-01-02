@@ -11,7 +11,16 @@ def show
     render json: bird
 end
 
+def create
+    bird = Bird.create!(bird_params)
+    render json: bird, status: :created
+end
+
 private
+
+def bird_params
+    params.permit(:name, :species)
+end
 
 def bird_not_found
     render json: {error: 'can not find your fucking bird!'}, status: 404
